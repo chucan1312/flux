@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 import { OnlineCount } from "../components/OnlineCount";
 import { IoAddOutline, IoKeyOutline, IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 import { PiSignOut } from "react-icons/pi";
