@@ -14,7 +14,7 @@ type Props = {
     room_id: string
 }
 
-export const FocusRoomBar = ({ room_id} : Props) => {
+export const FocusRoomBar = ({ room_id }: Props) => {
     const [focusRoom, setFocusRoom] = useState<FocusRoom[]>([]);
     const [focusPopUp, setFocusPopUp] = useState<{ x: number; y: number } | null>(null);
     const popupRef = useRef<HTMLDivElement | null>(null)
@@ -85,8 +85,13 @@ export const FocusRoomBar = ({ room_id} : Props) => {
             setFocusPopUp(null)
             setNewName("")
             setNewPrivate(false)
-            navigate(`./FocusRoom`)
         }
+    }
+
+    const handleJoin = async (roomId: string) => {
+        const { error } = await supabase.rpc("join_focus_room_exclusive", {
+            p_focus_room_id: roomId,
+        })
     }
 
     return (
@@ -98,17 +103,18 @@ export const FocusRoomBar = ({ room_id} : Props) => {
                 <IoFlameOutline /> Focus Rooms
             </div>
             <div className="flex flex-col items-start ml-[2.5rem] gap-2">
-            {focusRoom.map((fr) => (
-                <button
-                    key={fr.id}
-                    onClick={((e) => {
-                        e.preventDefault();
-                        navigate("./FocusRoom")
-                    })}
-                    className="flex items-start hover:bg-secondary w-full px-2 py-1 rounded-xl">
-                    {fr.name}
-                </button>
-            ))}
+                {focusRoom.map((fr) => (
+                    <button
+                        key={fr.id}
+                        onClick={((e) => {
+                            e.preventDefault();
+                            handleJoin(fr.id);
+                            navigate("./FocusRoom");
+                        })}
+                        className="flex items-start hover:bg-secondary w-full px-2 py-1 rounded-xl">
+                        {fr.name}
+                    </button>
+                ))}
             </div>
             {focusPopUp && (
                 <div ref={popupRef} className="z-10 text-md fixed bg-card rounded-xl border-secondary border-2 py-[1rem] px-2"

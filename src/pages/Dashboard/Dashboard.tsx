@@ -20,6 +20,7 @@ export const Dashboard = () => {
     
     useEffect(() => {
         (async () => {
+            
             const { data: roomData, error: roomError } = await supabase
                 .from("rooms")
                 .select("id, name, join_code")
