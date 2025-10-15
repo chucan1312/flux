@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { IoFlameOutline, IoToggle } from "react-icons/io5"
+import { IoFlameOutline } from "react-icons/io5"
 import { BsToggle2Off, BsToggle2On } from "react-icons/bs";
 import { supabase } from "../lib/supabaseClient"
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,8 @@ type FocusRoom = {
 type Props = {
     room_id: string
 }
-export const FocusRoomBar = ({ room_id }: Props) => {
+
+export const FocusRoomBar = ({ room_id} : Props) => {
     const [focusRoom, setFocusRoom] = useState<FocusRoom[]>([]);
     const [focusPopUp, setFocusPopUp] = useState<{ x: number; y: number } | null>(null);
     const popupRef = useRef<HTMLDivElement | null>(null)
@@ -84,21 +85,31 @@ export const FocusRoomBar = ({ room_id }: Props) => {
             setFocusPopUp(null)
             setNewName("")
             setNewPrivate(false)
-            navigate("../pages/Dashboard/FocusRooms")
+            navigate(`./FocusRoom`)
         }
     }
 
     return (
-        <div className="relative items-center bg-transparent text-foreground rounded-xl hover:bg-secondary focus:bg-secondary focus:font-bold">
+        <div className="relative items-center bg-transparent text-foreground rounded-xl mx-2">
             <div onContextMenu={(e) => {
                 e.preventDefault()
                 handlePopUp(e)
-            }} className="relative inline-flex items-center gap-3 mx-2 p-2">
+            }} className="relative inline-flex items-center gap-3 px-1 py-2 hover:bg-secondary focus:bg-secondary focus:font-bold rounded-xl w-full">
                 <IoFlameOutline /> Focus Rooms
             </div>
+            <div className="flex flex-col items-start ml-[2.5rem] gap-2">
             {focusRoom.map((fr) => (
-                <div key={fr.id}>{fr.name}</div>
+                <button
+                    key={fr.id}
+                    onClick={((e) => {
+                        e.preventDefault();
+                        navigate("./FocusRoom")
+                    })}
+                    className="flex items-start hover:bg-secondary w-full px-2 py-1 rounded-xl">
+                    {fr.name}
+                </button>
             ))}
+            </div>
             {focusPopUp && (
                 <div ref={popupRef} className="z-10 text-md fixed bg-card rounded-xl border-secondary border-2 py-[1rem] px-2"
                     style={{
@@ -118,6 +129,7 @@ export const FocusRoomBar = ({ room_id }: Props) => {
                         <div className="flex justify-left gap-2 items-end">
                             <div>Private</div>
                             <div className="mr-[1rem] text-2xl" onClick={((e) => {
+                                e.preventDefault();
                                 setNewPrivate(!newPrivate)
                             })} >
                                 {newPrivate ? <BsToggle2On /> : <BsToggle2Off />}

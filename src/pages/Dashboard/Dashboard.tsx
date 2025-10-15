@@ -1,6 +1,6 @@
 import { Outlet, Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { IoDocumentOutline, IoFlameOutline, IoChatboxEllipsesOutline, IoStatsChartOutline, IoReturnUpBackOutline } from "react-icons/io5";
+import { IoDocumentOutline, IoChatboxEllipsesOutline, IoStatsChartOutline, IoReturnUpBackOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
 import { supabase } from "../../lib/supabaseClient";
 import logo from "./logo.png";
