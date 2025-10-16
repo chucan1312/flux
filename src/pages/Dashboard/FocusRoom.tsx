@@ -1,6 +1,7 @@
 import { supabase } from "../../lib/supabaseClient"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import PomodoroTimer from "../../components/PomodoroTimer"
 
 export const FocusRoom = () => {
     const [focusRoomId, setFocusRoomId] = useState("")
@@ -42,20 +43,25 @@ export const FocusRoom = () => {
             }
 
         })();
-
     }
+
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 1500);
+
     return (
-        <div>
-            <h1>FocusRoom</h1>
-            <button
-                onClick={((e) => {
-                    e.preventDefault();
-                    handleLeave(focusRoomId);
-                })}
-                className="bg-primary rounded-full px-2 py-1 text-md text-primary-foreground"
-            >
-                Leave
-            </button>
+        <div className="flex flex-col justify-center pt-8">
+            <PomodoroTimer expiryTimestamp={time} />
+            <div className="flex justify-center mt-[calc(100dvh-25rem)]">
+                <button
+                    onClick={((e) => {
+                        e.preventDefault();
+                        handleLeave(focusRoomId);
+                    })}
+                    className="bg-primary rounded-full px-2 py-1 text-xl text-primary-foreground"
+                >
+                    Leave
+                </button>
+            </div>
         </div>
     )
 }

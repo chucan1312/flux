@@ -34,7 +34,7 @@ export const Dashboard = () => {
 
 
     return (
-        <div className="flex min-h-screen overflow-hidden">
+        <div className="flex h-dvh overflow-hidden">
             {/* Side Bar */}
             <aside className="border-secondary border-r-2">
                 <div className="flex justify-left items-center ml-2 lg:ml-4">
