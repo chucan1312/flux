@@ -58,8 +58,6 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                     Long Break</h2>
             </div>
             <div style={{ fontSize: '60px' }}>
-                <span>{days}</span>:
-                <span>{hours.toString().padStart(2, '0')}</span>:
                 <span>{minutes.toString().padStart(2, '0')}</span>:
                 <span>{seconds.toString().padStart(2, '0')}</span>
             </div>

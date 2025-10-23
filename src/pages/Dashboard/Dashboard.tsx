@@ -1,4 +1,4 @@
-import { Outlet, Link, useParams } from "react-router-dom";
+import { Outlet, Link, useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { IoDocumentOutline, IoChatboxEllipsesOutline, IoStatsChartOutline, IoReturnUpBackOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
@@ -17,10 +17,12 @@ export const Dashboard = () => {
     const { join_code } = useParams<{ join_code: string }>();
     const [room, setRoom] = useState<Room | null>(null);
     const name = room?.name;
-    
+    const [userId, setUserId] = useState("");
+    const navigate = useNavigate();
+
     useEffect(() => {
         (async () => {
-            
+
             const { data: roomData, error: roomError } = await supabase
                 .from("rooms")
                 .select("id, name, join_code")
@@ -32,6 +34,35 @@ export const Dashboard = () => {
         })();
     }, [join_code]);
 
+    const handleLeave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        (async () => {
+            const { data: { user }, error: userError } = await supabase.auth.getUser();
+            if (userError || !user) {
+                console.error("User not authenticated:", userError)
+                return
+            } else {
+                setUserId(user?.id)
+            }
+
+            const { data, error } = await supabase
+                .from("focus_members")
+                .select("focus_room_id, user_id, joined_at, left_at")
+                .eq("user_id", user?.id)
+                .is("left_at", null)
+                .single()
+
+            const { error: leaveError } = await supabase.rpc("leave_focus_room", {
+                p_focus_room_id: data?.focus_room_id,
+            })
+            if (leaveError) {
+                alert(leaveError)
+            } else {
+                navigate("/rooms");
+            }
+
+        })();
+    }
 
     return (
         <div className="flex h-dvh overflow-hidden">
@@ -45,7 +76,7 @@ export const Dashboard = () => {
                     <Link to="documents" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
                         <IoDocumentOutline /> Documents
                     </Link>
-                    <FocusRoomBar room_id={room?.id ?? ""}/>
+                    <FocusRoomBar room_id={room?.id ?? ""} />
                     <Link to="flashcards" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
                         <TbCards />  Flashcards
                     </Link>
@@ -55,9 +86,11 @@ export const Dashboard = () => {
                     <Link to="discussion" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
                         <IoChatboxEllipsesOutline /> Discussion
                     </Link>
-                    <Link to="/rooms" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary">
+                    <button
+                        onClick={handleLeave}
+                        className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary">
                         <IoReturnUpBackOutline /> All Rooms
-                    </Link>
+                    </button>
                 </nav>
             </aside>
             <main className="flex-1 bg-gray-50">
