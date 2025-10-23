@@ -28,7 +28,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
     });
 
     return (
-        <div style={{ textAlign: 'center' }} className="bg-gray-50/50 backdrop-blur-xs w-fit mx-auto p-[1rem] rounded-xl">
+        <div style={{ textAlign: 'center' }} className="bg-card/40 backdrop-blur-xs w-fit mx-auto p-[1rem] rounded-xl">
             <div className="flex justify-center gap-4">
 
                 <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold

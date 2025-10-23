@@ -4,13 +4,11 @@ import { useNavigate } from "react-router-dom"
 import PomodoroTimer from "../../components/PomodoroTimer"
 import { BackgroundDisplay } from "../../components/BackgroundDisplay";
 
-const minecraft = 'https://64.media.tumblr.com/1a0ed153039de2e909af8ff2fce6175d/88acb0a5670fb629-2f/s1280x1920/941efd0cb232f3f12711600100eb9e90b9fba419.gifv';
-
 export const FocusRoom = () => {
     const [focusRoomId, setFocusRoomId] = useState("")
     const navigate = useNavigate();
     const [userId, setUserId] = useState("") // optional for now
-
+    const [url, setUrl] = useState("");
 
 
     const handleLeave = async (focusRoomId: string) => {
@@ -55,7 +53,7 @@ export const FocusRoom = () => {
         <div className="flex flex-col justify-center h-[calc(100dvh-4rem)] bg-cover bg-center bg-no-repeat relative"
             style={{
                 backgroundImage:
-                    `url(${minecraft})`,
+                    `url(${url})`,
             }}>
             <div className="relative z-10 pt-8">
                 <PomodoroTimer expiryTimestamp={time} />
@@ -72,7 +70,7 @@ export const FocusRoom = () => {
 
                 </div>
             </div>
-            <BackgroundDisplay />
+            <BackgroundDisplay setUrl={setUrl}/>
         </div>
 
     )
