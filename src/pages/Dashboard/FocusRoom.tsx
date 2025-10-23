@@ -2,6 +2,9 @@ import { supabase } from "../../lib/supabaseClient"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import PomodoroTimer from "../../components/PomodoroTimer"
+import { BackgroundDisplay } from "../../components/BackgroundDisplay";
+
+const minecraft = 'https://64.media.tumblr.com/1a0ed153039de2e909af8ff2fce6175d/88acb0a5670fb629-2f/s1280x1920/941efd0cb232f3f12711600100eb9e90b9fba419.gifv';
 
 export const FocusRoom = () => {
     const [focusRoomId, setFocusRoomId] = useState("")
@@ -49,19 +52,28 @@ export const FocusRoom = () => {
     time.setSeconds(time.getSeconds() + 1500);
 
     return (
-        <div className="flex flex-col justify-center pt-8">
-            <PomodoroTimer expiryTimestamp={time} />
-            <div className="flex justify-center mt-[calc(100dvh-25rem)]">
-                <button
-                    onClick={((e) => {
-                        e.preventDefault();
-                        handleLeave(focusRoomId);
-                    })}
-                    className="bg-primary rounded-full px-2 py-1 text-xl text-primary-foreground"
-                >
-                    Leave
-                </button>
+        <div className="flex flex-col justify-center h-[calc(100dvh-4rem)] bg-cover bg-center bg-no-repeat relative"
+            style={{
+                backgroundImage:
+                    `url(${minecraft})`,
+            }}>
+            <div className="relative z-10 pt-8">
+                <PomodoroTimer expiryTimestamp={time} />
+                <div className="flex justify-center mt-[calc(100dvh-25rem)]">
+                    <button
+                        onClick={((e) => {
+                            e.preventDefault();
+                            handleLeave(focusRoomId);
+                        })}
+                        className="bg-primary rounded-full px-3 py-1 text-xl text-primary-foreground font-semibold ring-foreground/35 ring-2"
+                    >
+                        Leave
+                    </button>
+
+                </div>
             </div>
+            <BackgroundDisplay />
         </div>
+
     )
 }

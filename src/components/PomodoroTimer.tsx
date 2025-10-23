@@ -28,10 +28,10 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
     });
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center' }} className="bg-gray-50/50 backdrop-blur-xs w-fit mx-auto p-[1rem] rounded-xl">
             <div className="flex justify-center gap-4">
 
-                <h2 className={`rounded-full px-2 py-1 border-secondary border-2
+                <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
                 ${(state == "Pomodoro") ? "bg-secondary" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
@@ -39,7 +39,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                         restart(time, false);
                         setState("Pomodoro");
                     })}>Pomodoro</h2>
-                <h2 className={`rounded-full px-2 py-1 border-secondary border-2
+                <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
                 ${(state == "Short Break") ? "bg-secondary" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
@@ -47,7 +47,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                         restart(time, false);
                         setState("Short Break");
                     })}>Short Break</h2>
-                <h2 className={`rounded-full px-2 py-1 border-secondary border-2
+                <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
                 ${(state == "Long Break") ? "bg-secondary" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
@@ -57,13 +57,13 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                     })}>
                     Long Break</h2>
             </div>
-            <div style={{ fontSize: '60px' }}>
+            <div style={{ fontSize: '60px' }} className="font-semibold">
                 <span>{minutes.toString().padStart(2, '0')}</span>:
                 <span>{seconds.toString().padStart(2, '0')}</span>
             </div>
             <div className="flex justify-center mt-4 gap-2">
                 <button
-                className="bg-primary text-xl text-primary-foreground rounded-full px-4 py-1 w-[6rem] font-semibold" 
+                className="bg-primary text-xl text-primary-foreground rounded-full px-4 py-1 w-[6rem] font-semibold ring-foreground/15 ring-2" 
                 onClick={(() => {
                     if (started) {
                         pause();
