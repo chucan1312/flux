@@ -28,11 +28,13 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
     });
 
     return (
-        <div style={{ textAlign: 'center' }} className="bg-card/40 backdrop-blur-xs w-fit mx-auto p-[1rem] rounded-xl">
+        <div style={{ textAlign: 'center' }} className="bg-card/40 backdrop-blur-sm w-fit mx-auto p-[1rem] rounded-xl">
+            <input className="flex inline-flex text-center text-2xl lg:text-3xl mb-3 font-semibold focus:outline-none focus:ring-2 focus:ring-secondary" placeholder="Add focus title">
+            </input>
             <div className="flex justify-center gap-4">
 
                 <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
-                ${(state == "Pomodoro") ? "bg-secondary" : "bg-transparent"}`}
+                ${(state == "Pomodoro") ? "bg-background" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + 1500); // restart to 25 minutes
@@ -40,7 +42,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                         setState("Pomodoro");
                     })}>Pomodoro</h2>
                 <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
-                ${(state == "Short Break") ? "bg-secondary" : "bg-transparent"}`}
+                ${(state == "Short Break") ? "bg-background" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + 300); // restart to 5 minutes
@@ -48,7 +50,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
                         setState("Short Break");
                     })}>Short Break</h2>
                 <h2 className={`rounded-full px-2 py-1 border-secondary border-2 font-semibold
-                ${(state == "Long Break") ? "bg-secondary" : "bg-transparent"}`}
+                ${(state == "Long Break") ? "bg-background" : "bg-transparent"}`}
                     onClick={((e) => {
                         const time = new Date();
                         time.setSeconds(time.getSeconds() + 900); // restart to 5 minutes
@@ -63,7 +65,7 @@ const PomodoroTimer: React.FC<TimerProps> = ({ expiryTimestamp }) => {
             </div>
             <div className="flex justify-center mt-4 gap-2">
                 <button
-                className="bg-primary text-xl text-primary-foreground rounded-full px-4 py-1 w-[6rem] font-semibold ring-foreground/15 ring-2" 
+                className="bg-primary text-xl text-primary-foreground rounded-full px-4 py-1 w-[6rem] font-semibold border-foreground/15 border-2" 
                 onClick={(() => {
                     if (started) {
                         pause();

@@ -57,20 +57,19 @@ export const FocusRoom = () => {
             }}>
             <div className="relative z-10 pt-8">
                 <PomodoroTimer expiryTimestamp={time} />
-                <div className="flex justify-center mt-[calc(100dvh-25rem)]">
+                <div className="flex justify-center mt-[calc(100dvh-30rem)]">
                     <button
                         onClick={((e) => {
                             e.preventDefault();
                             handleLeave(focusRoomId);
                         })}
-                        className="bg-primary rounded-full px-3 py-1 text-xl text-primary-foreground font-semibold ring-foreground/35 ring-2"
+                        className="bg-primary rounded-full px-3 py-1 text-xl text-primary-foreground font-semibold border-foreground/15 border-2"
                     >
                         Leave
                     </button>
-
                 </div>
             </div>
-            <BackgroundDisplay setUrl={setUrl}/>
+            <BackgroundDisplay setUrl={setUrl} />
         </div>
 
     )
