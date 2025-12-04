@@ -16,7 +16,7 @@ const urlList: Url[] = [
     },
     {
         name: "Hanoi",
-        url: "https://i.pinimg.com/1200x/e1/d5/c5/e1d5c5bd69af63f51643a7a545602f77.jpg"
+        url: "https://i.pinimg.com/1200x/2c/3e/bc/2c3ebc61e4e8eab791465588d057b879.jpg"
     },
     {
         name: "Anime street",
@@ -33,6 +33,10 @@ const urlList: Url[] = [
     {
         name: "Cherry",
         url: "https://i.pinimg.com/736x/a8/4b/38/a84b38bfc520a3b549a6817904ee10d4.jpg"
+    },
+    {
+        name: "Iridescent liquid",
+        url: "https://i.pinimg.com/1200x/4d/6f/87/4d6f87d27a79bfdfe7252db974a35c64.jpg"
     }
 ]
 

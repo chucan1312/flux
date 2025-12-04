@@ -1,6 +1,6 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
-import logo from "./Dashboard/logo.png";
+import logo from "../assets/logo.png";
 
 import { Link } from "react-router-dom";
 

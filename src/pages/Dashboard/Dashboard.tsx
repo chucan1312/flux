@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { IoDocumentOutline, IoChatboxEllipsesOutline, IoStatsChartOutline, IoReturnUpBackOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
 import { supabase } from "../../lib/supabaseClient";
-import logo from "./logo.png";
+import logo from "../../assets/logo.png";
 import { FocusRoomBar } from "../../components/FocusRoomBar";
 
 type Room = {
@@ -80,7 +80,9 @@ export const Dashboard = () => {
                     <Link to="flashcards" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
                         <TbCards />  Flashcards
                     </Link>
-                    <Link to="leaderboard" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
+                    <Link to="leaderboard"
+                        state={{ room }}
+                        className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">
                         <IoStatsChartOutline /> Leaderboard
                     </Link>
                     <Link to="discussion" className="relative inline-flex items-center mx-2 bg-transparent text-foreground rounded-xl p-2 gap-3 hover:bg-secondary focus:bg-secondary focus:font-bold">

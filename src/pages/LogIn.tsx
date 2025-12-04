@@ -29,7 +29,7 @@ export const LogIn = () => {
                         className="border-secondary border-b-2 w-[20rem] focus:outline-none focus:placeholder-transparent"
                         required />
                     <input
-                        type="text" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}
+                        type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}
                         className="border-secondary border-b-2 w-[20rem] focus:outline-none focus:placeholder-transparent"
                         required minLength={8}/>
                     <button
